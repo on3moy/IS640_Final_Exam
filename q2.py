@@ -34,8 +34,12 @@ try:
                 # Get word count
                 word_count[word] = word_count.get(word, 0) + 1
                 # Get row locations
-                word_location[word] = word_location.get(word,str()) + ' ' + str(row)
-
+                if word_location.get(word):
+                    if str(row) not in word_location[word]:
+                        word_location[word] += ' ' + str(row)
+                else:
+                    word_location[word] = word_location.get(word, str()) + str(row)
+                    
     # Sort words according to keys in ascending order
     words_sorted = sorted(word_count.items(), key=lambda x : x)
     
